@@ -10,7 +10,6 @@ export const StaticBackgroundContainer = ({ children }: StaticBackgroundContaine
     <BackgroundBox>
       <BackgroundBox css={{ backgroundColor: "unset", backgroundImage: "url(/assets/BackgroundSquidarms.png)" }}>
         {children}
-
       </BackgroundBox>
     </BackgroundBox>
   );

@@ -17,7 +17,9 @@ export const {
     },
   },
   media: {
-    bp1: "(min-width: 480px)",
+    bp1: "(min-width: 400px)",
+    bp2: "(min-width: 750px)",
+    bp3: "(min-width: 1200px)",
   },
   utils: {},
 });

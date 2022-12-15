@@ -5,8 +5,29 @@ export const StyledLink = styled(Link, {
   borderRadius: "50%",
   cursor: "pointer",
   background: "transparent",
-  paddingLeft: "40px",
-  '@bp1': {
-
+  textDecoration: "none",
+  fontSize: "27px",
+  color: "$whiteGray",
+  position: "relative",
+  zIndex: "2",
+  variants: {
+    type: {
+      navLink: {
+        '&:after': {
+          content: "''",
+          position: "absolute",
+          background: "$whiteGray",
+          height: "2px",
+          width: "0",
+          left: "0",
+          bottom: "-3px",
+          borderRadius: "5px",
+          transition: "0.3s",
+        },
+        '&:hover:after': {
+          width: "100%",
+        },
+      },
+    },
   },
 });
