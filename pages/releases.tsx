@@ -1,4 +1,3 @@
-import React from "react";
 import { useRecoilValue } from "recoil";
 import { navIsOpen } from "../atoms/navIsOpen";
 import { Header } from "../components/basic/Header";
@@ -7,28 +6,27 @@ import { StaticBackgroundContainer } from "../components/basic/StaticBackgroundC
 import { ContentContainer } from "../components/styledComponents/ContentContainer";
 import { Heading } from "../components/styledComponents/Heading";
 import { ContactLinkResponse } from "../models/responseModels";
-import { getSoc } from "../services/landingService";
+import { getReleases, getSoc } from "../services/landingService";
 
 interface HomeProps {
   res: ContactLinkResponse;
 }
 
-export default function Home({ res }: HomeProps) {
+export default function Releases({ res, releases }: HomeProps) {
   const isOpen = useRecoilValue(navIsOpen);
-
   return (
     <StaticBackgroundContainer>
       <Header />
       <ContentContainer isOpen={isOpen}>
         <Heading css={{
-          paddingTop: "calc(50vh - 175px)",
-          '@bp2': { fontSize: "50px", paddingTop: "calc(50vh - 220px)" },
+          paddingTop: "20px",
+          '@bp2': { fontSize: "30px", paddingTop: "40px" },
           '@bp3': {
-            fontSize: "100px",
+            fontSize: "70px",
           },
         }}
         >
-          SQUID ROE RECORDS
+          RELEASES
         </Heading>
         <SocialsLinks data={res} />
       </ContentContainer>
@@ -42,5 +40,10 @@ export async function getServerSideProps() {
     process.env.NEXT_PUBLIC_API_KEY as string,
   );
 
-  return { props: { res } };
+  const releases = await getReleases(
+    process.env.NEXT_PUBLIC_BASE_URL as string,
+    process.env.NEXT_PUBLIC_API_KEY as string,
+  );
+
+  return { props: { res, releases } };
 }
