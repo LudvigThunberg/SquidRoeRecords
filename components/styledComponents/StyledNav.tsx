@@ -13,6 +13,7 @@ export const StyledNav = styled("nav", {
   transition: "right 0.5s ease-in-out",
   '@bp2': {
     position: "unset",
+    height: "unset",
   },
   variants: {
     isOpen: {

@@ -14,6 +14,9 @@ export const {
     colors: {
       whiteGray: "#DEDEDE",
       black: "#000000",
+      gray: "#666666",
+      transparentGray: "rgba(102, 102, 102, 0.7)",
+      solidGray: "#2F2F2F",
     },
   },
   media: {

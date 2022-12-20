@@ -8,5 +8,5 @@ export const BackgroundBox = styled("div", {
   backgroundRepeat: "no-repeat",
   backgroundPosition: "center",
   backgroundSize: "cover",
-  overflow: "hidden",
+  overflowX: "hidden",
 });

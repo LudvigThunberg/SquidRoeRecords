@@ -5,12 +5,11 @@ export const InvisibleButton = styled("button", {
   border: "none",
   cursor: "pointer",
   marginLeft: "auto",
-  marginRight: "40px",
   zIndex: "2",
   variants: {
     hamburger: {
       menu: {
-        '@bp2': {
+        "@bp2": {
           display: "none",
         },
       },

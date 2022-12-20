@@ -17,29 +17,28 @@ export default function Home({ res }: HomeProps) {
   const isOpen = useRecoilValue(navIsOpen);
 
   return (
-    <StaticBackgroundContainer>
+    <ContentContainer isOpen={isOpen}>
       <Header />
-      <ContentContainer isOpen={isOpen}>
-        <Heading css={{
-          paddingTop: "calc(50vh - 175px)",
-          '@bp2': { fontSize: "50px", paddingTop: "calc(50vh - 220px)" },
-          '@bp3': {
+      <Heading
+        isOpen={isOpen}
+        css={{
+          "@bp2": { fontSize: "50px" },
+          "@bp3": {
             fontSize: "100px",
           },
         }}
-        >
-          SQUID ROE RECORDS
-        </Heading>
-        <SocialsLinks data={res} />
-      </ContentContainer>
-    </StaticBackgroundContainer>
+      >
+        SQUID ROE RECORDS
+      </Heading>
+      <SocialsLinks data={res} />
+    </ContentContainer>
   );
 }
 
 export async function getServerSideProps() {
   const res = await getSoc(
     process.env.NEXT_PUBLIC_BASE_URL as string,
-    process.env.NEXT_PUBLIC_API_KEY as string,
+    process.env.NEXT_PUBLIC_API_KEY as string
   );
 
   return { props: { res } };
