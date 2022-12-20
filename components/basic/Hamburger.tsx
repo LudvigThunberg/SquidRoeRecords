@@ -2,18 +2,7 @@ import { useRecoilState } from "recoil";
 import { styled } from "../../stitches.config";
 import { Box } from "../styledComponents/Box";
 import { navIsOpen } from "../../atoms/navIsOpen";
-
-const UnvisibleButton = styled("button", {
-  background: "transparent",
-  border: "none",
-  cursor: "pointer",
-  marginLeft: "auto",
-  marginRight: "40px",
-  zIndex: "2",
-  '@bp2': {
-    display: "none",
-  },
-});
+import { InvisibleButton } from "../styledComponents/InvisibleButton";
 
 const HamburgerPart = styled("div", {
   width: "30px",
@@ -44,7 +33,7 @@ export const Hamburger = () => {
   };
 
   return (
-    <UnvisibleButton onClick={handleClick}>
+    <InvisibleButton hamburger="menu" onClick={handleClick}>
       <Box css={{
         display: "flex", flexDirection: "column", gap: "5px", background: "transparent",
       }}
@@ -53,6 +42,6 @@ export const Hamburger = () => {
         <HamburgerPart isMiddlePart={isOpen} />
         <HamburgerPart isOpen={isOpen} />
       </Box>
-    </UnvisibleButton>
+    </InvisibleButton>
   );
 };

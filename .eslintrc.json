@@ -1,5 +1,10 @@
 {
-  "extends": ["airbnb",
+  "extends": "next/core-web-vitals"
+}
+
+//"next/core-web-vitals"
+
+/* ["airbnb",
   "airbnb-typescript"],
   "parserOptions": {
       "project": "./tsconfig.json"
@@ -10,8 +15,6 @@
     "react/function-component-definition": 0,
     "arrow-body-style": 0,
     "react/react-in-jsx-scope": 0,
-    "react/jsx-props-no-spreading": 0
-  }
-}
-
-//"next/core-web-vitals"
+    "react/jsx-props-no-spreading": 0,
+    "react/no-danger": 0
+  } */

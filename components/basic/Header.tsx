@@ -18,23 +18,40 @@ export const Header = () => {
 
   return (
     <StyledHeader>
-      <StyledLink onClick={handleClick} href="/" css={{ paddingLeft: "40px" }}>
-        <Image src="/assets/SquidRoeLogo.png" alt="Squid Roe Records Logo" width={70} height={70} style={{ borderRadius: "50%" }} />
+      <StyledLink
+        onClick={handleClick}
+        href="/" /* css={{ paddingLeft: "40px" }} */
+      >
+        <Image
+          src="/assets/SquidRoeLogo.png"
+          alt="Squid Roe Records Logo"
+          width={70}
+          height={70}
+          style={{ borderRadius: "50%" }}
+        />
       </StyledLink>
       <Hamburger />
       <StyledNav isOpen={isOpen}>
         <StyledUl>
           <StyledLi>
-            <StyledLink type="navLink" onClick={handleClick} href="/releases">Releases</StyledLink>
+            <StyledLink type="navLink" onClick={handleClick} href="/releases">
+              Releases
+            </StyledLink>
           </StyledLi>
           <StyledLi>
-            <StyledLink type="navLink" onClick={handleClick} href="/playlists">Playlists</StyledLink>
+            <StyledLink type="navLink" onClick={handleClick} href="/playlists">
+              Playlists
+            </StyledLink>
           </StyledLi>
           <StyledLi>
-            <StyledLink type="navLink" onClick={handleClick} href="/about">About</StyledLink>
+            <StyledLink type="navLink" onClick={handleClick} href="/about">
+              About
+            </StyledLink>
           </StyledLi>
           <StyledLi>
-            <StyledLink type="navLink" onClick={handleClick} href="/contact">Contact</StyledLink>
+            <StyledLink type="navLink" onClick={handleClick} href="/contact">
+              Contact
+            </StyledLink>
           </StyledLi>
         </StyledUl>
       </StyledNav>

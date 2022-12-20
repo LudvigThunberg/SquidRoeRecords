@@ -3,4 +3,15 @@
     font-family: 'Roboto', sans-serif;
     margin: 0;
     background-color: #666666;
+    box-sizing: border-box;
+}
+*::-webkit-scrollbar{
+    background: transparent;
+    width: 5px;
+}
+
+*::-webkit-scrollbar-thumb{
+    background: #666666;
+    border: 1px solid #DEDEDE;
+    border-radius: 20px;
 }
