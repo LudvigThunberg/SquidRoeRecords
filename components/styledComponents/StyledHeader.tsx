@@ -13,4 +13,7 @@ export const StyledHeader = styled("header", {
   "@bp2": {
     height: "155px",
   },
+  "@bp3": {
+    padding: "30px 100px 30px 100px",
+  },
 });

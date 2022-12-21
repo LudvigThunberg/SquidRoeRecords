@@ -1,21 +1,18 @@
 import { useRecoilValue } from "recoil";
 import { navIsOpen } from "../../atoms/navIsOpen";
-import {
-  AlbumModelResponse,
-  IconModelResponse,
-} from "../../models/responseModels";
+import { AlbumModel, IconModelResponse } from "../../models/responseModels";
 import { Box } from "../styledComponents/Box";
 import { Album } from "./Album";
 
 interface AlbumsProps {
-  releases: AlbumModelResponse;
+  releases: AlbumModel[];
 
   icons: IconModelResponse;
 }
 
 export const Albums = ({ releases, icons }: AlbumsProps) => {
   const isOpen = useRecoilValue(navIsOpen);
-  const albumReleases = releases.data.reverse().map((album) => {
+  const albumReleases = releases.map((album) => {
     return <Album key={album.id} album={album} icons={icons} />;
   });
   return (

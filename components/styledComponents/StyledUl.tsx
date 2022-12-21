@@ -7,10 +7,9 @@ export const StyledUl = styled("ul", {
   alignItems: "center",
   gap: "60px",
   padding: "0",
-  '@bp2': {
+  "@bp2": {
     flexDirection: "row",
     gap: "15px",
     marginLeft: "auto",
-    marginRight: "40px",
   },
 });

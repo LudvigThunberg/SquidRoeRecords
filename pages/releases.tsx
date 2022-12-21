@@ -3,24 +3,33 @@ import { navIsOpen } from "../atoms/navIsOpen";
 import { Albums } from "../components/basic/Albums";
 import { Header } from "../components/basic/Header";
 import { SocialsLinks } from "../components/basic/SocialsLinks";
-import { StaticBackgroundContainer } from "../components/basic/StaticBackgroundContainer";
 import { ContentContainer } from "../components/styledComponents/ContentContainer";
 import { Heading } from "../components/styledComponents/Heading";
 import {
-  AlbumModelResponse,
+  AlbumModel,
   ContactLinkResponse,
   IconModelResponse,
 } from "../models/responseModels";
 import { getIcons, getReleases, getSoc } from "../services/landingService";
+import Error from "next/error";
 
 interface HomeProps {
   links: ContactLinkResponse;
-  releases: AlbumModelResponse;
+  releases: AlbumModel[];
   icons: IconModelResponse;
+  errorCode: number;
 }
 
-export default function Releases({ links, releases, icons }: HomeProps) {
+export default function Releases({
+  errorCode,
+  links,
+  releases,
+  icons,
+}: HomeProps) {
   const isOpen = useRecoilValue(navIsOpen);
+  if (errorCode) {
+    return <Error statusCode={errorCode} />;
+  }
 
   return (
     <ContentContainer isOpen={isOpen}>
@@ -45,20 +54,34 @@ export default function Releases({ links, releases, icons }: HomeProps) {
 }
 
 export async function getServerSideProps() {
-  const links = await getSoc(
-    process.env.NEXT_PUBLIC_BASE_URL as string,
-    process.env.NEXT_PUBLIC_API_KEY as string
-  );
+  try {
+    const res = Promise.all([
+      getSoc(
+        process.env.NEXT_PUBLIC_BASE_URL as string,
+        process.env.NEXT_PUBLIC_API_KEY as string
+      ),
+      getReleases(
+        process.env.NEXT_PUBLIC_BASE_URL as string,
+        process.env.NEXT_PUBLIC_API_KEY as string
+      ),
+      getIcons(
+        process.env.NEXT_PUBLIC_BASE_URL as string,
+        process.env.NEXT_PUBLIC_API_KEY as string
+      ),
+    ]);
 
-  const releases = await getReleases(
-    process.env.NEXT_PUBLIC_BASE_URL as string,
-    process.env.NEXT_PUBLIC_API_KEY as string
-  );
+    const [links, releasesUnsorted, icons] = await res;
 
-  const icons = await getIcons(
-    process.env.NEXT_PUBLIC_BASE_URL as string,
-    process.env.NEXT_PUBLIC_API_KEY as string
-  );
+    const releases = releasesUnsorted.data.sort(
+      (a, b) =>
+        parseInt(b.attributes.releaseDate) - parseInt(a.attributes.releaseDate)
+    );
 
-  return { props: { links, releases, icons } };
+    return { props: { errorCode: NaN, links, releases, icons } };
+  } catch (error: any) {
+    if (error.response.status) {
+      return { props: { errorCode: 500 } };
+    }
+    return { props: { errorCode: 500 } };
+  }
 }
