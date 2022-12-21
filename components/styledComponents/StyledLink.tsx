@@ -10,10 +10,13 @@ export const StyledLink = styled(Link, {
   color: "$whiteGray",
   position: "relative",
   zIndex: "2",
+  "@bp2": {
+    fontSize: "18px",
+  },
   variants: {
     type: {
       navLink: {
-        '&:after': {
+        "&:after": {
           content: "''",
           position: "absolute",
           background: "$whiteGray",
@@ -24,7 +27,7 @@ export const StyledLink = styled(Link, {
           borderRadius: "5px",
           transition: "0.3s",
         },
-        '&:hover:after': {
+        "&:hover:after": {
           width: "100%",
         },
       },

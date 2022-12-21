@@ -48,8 +48,7 @@ export const Album = ({ album, icons }: AlbumProps) => {
         background: "$solidGray",
         maxWidth: "320px",
         "@bp2": {
-          flexDirection: "row",
-          flexWrap: "wrap",
+          maxWidth: "740px",
         },
       }}
     >
@@ -58,6 +57,7 @@ export const Album = ({ album, icons }: AlbumProps) => {
           {artist} - {title}
         </Heading>
       </Box>
+
       <Box
         css={{
           maxWidth: "320px",
@@ -65,8 +65,10 @@ export const Album = ({ album, icons }: AlbumProps) => {
           gap: "20px",
           gridTemplateColumns: "1fr 1fr",
           gridTemplateRows: "124px 124px",
-          "@bp3": {
+          "@bp2": {
             maxWidth: "800px",
+            gridTemplateColumns: "1fr 1fr 2fr",
+            gridTemplateRows: "124px",
           },
         }}
       >
@@ -77,6 +79,9 @@ export const Album = ({ album, icons }: AlbumProps) => {
             gridColumn: "1 span 1",
             gridRow: "1",
             justifySelf: "end",
+            "@bp2": {
+              justifySelf: "start",
+            },
           }}
         >
           <Img css={{ borderRadius: "2px" }} src={coverLink} />
@@ -90,17 +95,26 @@ export const Album = ({ album, icons }: AlbumProps) => {
             flexWrap: "wrap",
             gap: "10px",
             justifySelf: "start",
+            "@bp2": {
+              justifySelf: "center",
+            },
           }}
         >
           {iconLinks}
         </Box>
+
         <Box
           css={{
             gridRow: "2",
             gridColumnStart: "1",
             gridColumnEnd: "3",
             justifySelf: "center",
-            "@bp1": {},
+            "@bp2": {
+              gridRow: "1",
+              gridColumnStart: "3",
+              gridColumnEnd: "4",
+              justifySelf: "end",
+            },
           }}
         >
           <Box
