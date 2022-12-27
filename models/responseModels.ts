@@ -44,3 +44,32 @@ export interface IconModel {
 export interface IconModelResponse {
   data: IconModel[];
 }
+
+export interface PlaylistModel {
+  attributes: {
+    title: string;
+    creator: string;
+    playlistLink: string;
+    playlistIframe: string;
+    order: number;
+  };
+  id: number;
+}
+
+export interface PlaylistModelResponse {
+  data: PlaylistModel[];
+}
+
+export interface AboutModel {
+  attributes: {
+    title: string;
+    text: string;
+    imageUrl: string;
+    order: number;
+  };
+  id: number;
+}
+
+export interface AboutModelResponse {
+  data: AboutModel[];
+}

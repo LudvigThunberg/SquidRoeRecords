@@ -13,5 +13,19 @@ export const Box = styled("div", {
         right: "1",
       },
     },
+    variant: {
+      contentContainer: {
+        width: "90%",
+        display: "flex",
+        flexDirection: "column",
+        padding: "20px",
+        borderRadius: "3px",
+        background: "$solidGray",
+        maxWidth: "320px",
+        "@bp2": {
+          maxWidth: "740px",
+        },
+      },
+    },
   },
 });

@@ -6,7 +6,7 @@ import { SocialsLinks } from "../components/basic/SocialsLinks";
 import { ContentContainer } from "../components/styledComponents/ContentContainer";
 import { Heading } from "../components/styledComponents/Heading";
 import { ContactLinkResponse } from "../models/responseModels";
-import { getSoc } from "../services/landingService";
+import { getSoc } from "../services/requestService";
 import Error from "next/error";
 
 interface HomeProps {
@@ -48,7 +48,7 @@ export async function getServerSideProps() {
     return { props: { errorCode: NaN, res } };
   } catch (error: any) {
     if (error.response.status) {
-      return { props: { errorCode: 500 } };
+      return { props: { errorCode: error.response.status } };
     }
     return { props: { errorCode: 500 } };
   }

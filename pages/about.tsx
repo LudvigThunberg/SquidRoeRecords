@@ -1,35 +1,35 @@
 import { useRecoilValue } from "recoil";
 import { navIsOpen } from "../atoms/navIsOpen";
-import { Albums } from "../components/basic/Albums";
 import { Header } from "../components/basic/Header";
 import { SocialsLinks } from "../components/basic/SocialsLinks";
 import { ContentContainer } from "../components/styledComponents/ContentContainer";
 import { Heading } from "../components/styledComponents/Heading";
-import {
-  AlbumModel,
-  ContactLinkResponse,
-  IconModelResponse,
-} from "../models/responseModels";
-import { getIcons, getReleases, getSoc } from "../services/requestService";
+import { AboutModel, ContactLinkResponse } from "../models/responseModels";
+import { getAboutContent, getSoc } from "../services/requestService";
 import Error from "next/error";
+import { AboutSection } from "../components/basic/AboutSection";
+import { Box } from "../components/styledComponents/Box";
 
-interface HomeProps {
+interface AboutProps {
   links: ContactLinkResponse;
-  releases: AlbumModel[];
-  icons: IconModelResponse;
+  about: AboutModel[];
   errorCode: number;
 }
 
-export default function Releases({
-  errorCode,
-  links,
-  releases,
-  icons,
-}: HomeProps) {
+export default function About({ links, errorCode, about }: AboutProps) {
   const isOpen = useRecoilValue(navIsOpen);
   if (errorCode) {
     return <Error statusCode={errorCode} />;
   }
+  console.log("links: ", about);
+
+  const abouts = about.map((aboutSection) => {
+    return (
+      <Box css={{}} key={aboutSection.id}>
+        <AboutSection aboutSection={aboutSection} />
+      </Box>
+    );
+  });
 
   return (
     <ContentContainer isOpen={isOpen}>
@@ -45,9 +45,31 @@ export default function Releases({
           },
         }}
       >
-        RELEASES
+        ABOUT
       </Heading>
-      <Albums releases={releases} icons={icons} />
+      <Box
+        variant="contentContainer"
+        css={{
+          display: "grid",
+          gridGap: "10px",
+          gridTemplateRows: "1fr 1fr 1fr 1fr 1fr 1fr",
+          gridAutoFlow: "column",
+          margin: "30px 0px 80px 00px",
+          "@bp2": {
+            maxWidth: "600px",
+            gridTemplateRows: "1fr 1fr 1fr",
+            gridTemplateColumns: "auto",
+          },
+          "@bp3": {
+            maxWidth: "1000px",
+            gridTemplateRows: "1fr 1fr",
+            gridTemplateColumns: "auto",
+          },
+        }}
+        isOpen={isOpen}
+      >
+        {abouts}
+      </Box>
       <SocialsLinks data={links} />
     </ContentContainer>
   );
@@ -60,24 +82,20 @@ export async function getServerSideProps() {
         process.env.NEXT_PUBLIC_BASE_URL as string,
         process.env.NEXT_PUBLIC_API_KEY as string
       ),
-      getReleases(
-        process.env.NEXT_PUBLIC_BASE_URL as string,
-        process.env.NEXT_PUBLIC_API_KEY as string
-      ),
-      getIcons(
+
+      getAboutContent(
         process.env.NEXT_PUBLIC_BASE_URL as string,
         process.env.NEXT_PUBLIC_API_KEY as string
       ),
     ]);
 
-    const [links, releasesUnsorted, icons] = await res;
+    const [links, aboutUnsorted] = await res;
 
-    const releases = releasesUnsorted.data.sort(
-      (a, b) =>
-        parseInt(b.attributes.releaseDate) - parseInt(a.attributes.releaseDate)
+    const about = aboutUnsorted.data.sort(
+      (a, b) => a.attributes.order - b.attributes.order
     );
 
-    return { props: { errorCode: NaN, links, releases, icons } };
+    return { props: { errorCode: NaN, links, about } };
   } catch (error: any) {
     if (error.response.status) {
       return { props: { errorCode: error.response.status } };

@@ -1,7 +1,7 @@
 import { styled } from "../../stitches.config";
 
 export const StyledHeader = styled("header", {
-  height: "110px",
+  //height: "110px",
   width: "100vw",
   background:
     "linear-gradient(180deg, rgba(31,31,31,1) 0%, rgba(31,31,31,0) 100%)",
@@ -11,9 +11,9 @@ export const StyledHeader = styled("header", {
   overflow: "unset",
   padding: "30px 40px 30px 40px",
   "@bp2": {
-    height: "155px",
+    padding: "40px 50px 40px 50px",
   },
   "@bp3": {
-    padding: "30px 100px 30px 100px",
+    padding: "40px 100px 40px 100px",
   },
 });

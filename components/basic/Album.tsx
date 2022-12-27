@@ -38,20 +38,7 @@ export const Album = ({ album, icons }: AlbumProps) => {
   });
 
   return (
-    <Box
-      css={{
-        width: "90%",
-        display: "flex",
-        flexDirection: "column",
-        padding: "20px",
-        borderRadius: "3px",
-        background: "$solidGray",
-        maxWidth: "320px",
-        "@bp2": {
-          maxWidth: "740px",
-        },
-      }}
-    >
+    <Box variant="contentContainer">
       <Box css={{ paddingBottom: "10px" }}>
         <Heading as="h3" css={{ fontSize: "11px" }}>
           {artist} - {title}

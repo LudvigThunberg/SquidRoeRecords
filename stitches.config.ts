@@ -12,7 +12,7 @@ export const {
 } = createStitches({
   theme: {
     colors: {
-      whiteGray: "#DEDEDE",
+      whiteGray: "#DEDEDE", //"#FCE205"
       black: "#000000",
       gray: "#666666",
       transparentGray: "rgba(102, 102, 102, 0.7)",
