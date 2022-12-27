@@ -19,6 +19,8 @@ export const Header = () => {
   return (
     <StyledHeader>
       <StyledLink
+        type="logo"
+        css={{ borderRadius: "50%" }}
         onClick={handleClick}
         href="/" /* css={{ paddingLeft: "40px" }} */
       >
@@ -27,7 +29,10 @@ export const Header = () => {
           alt="Squid Roe Records Logo"
           width={70}
           height={70}
-          style={{ borderRadius: "50%" }}
+          style={{
+            borderRadius: "50%",
+            //boxShadow: "16px 16px 60px 10px rgba(0,0,0,0.5)",
+          }}
         />
       </StyledLink>
       <Hamburger />

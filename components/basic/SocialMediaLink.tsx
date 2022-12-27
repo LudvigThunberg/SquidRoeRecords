@@ -7,9 +7,7 @@ interface SocialMediaLinkProps {
 }
 
 export const SocialMediaLink = ({ link }: SocialMediaLinkProps) => {
-  const {
-    contactLink, iconUrl,
-  } = link.attributes;
+  const { contactLink, iconUrl } = link.attributes;
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
@@ -21,7 +19,9 @@ export const SocialMediaLink = ({ link }: SocialMediaLinkProps) => {
             borderRadius: "50%",
             cursor: "pointer",
             zIndex: "1",
-            '@bp2': {
+            transition: "box-shadow 0.5s ease",
+            "&:hover": {},
+            "@bp2": {
               width: "55px",
             },
           }}
@@ -31,6 +31,7 @@ export const SocialMediaLink = ({ link }: SocialMediaLinkProps) => {
           <Img
             css={{
               width: "100%",
+              borderRadius: "50%",
             }}
             src={iconUrl}
           />
