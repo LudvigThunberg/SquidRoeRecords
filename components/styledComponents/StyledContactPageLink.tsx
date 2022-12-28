@@ -6,15 +6,18 @@ const grow = keyframes({
   "100%": { transform: "scale(1)" },
 });
 
-export const StyledALink = styled("a", {
+export const StyledContactPageLink = styled("a", {
   background: "transparent",
   transition: "all .2s ease-in-out",
-  width: "35px",
+  width: "90px",
   borderRadius: "50%",
   cursor: "pointer",
   zIndex: "1",
   "@bp2": {
-    width: "55px",
+    width: "120px",
+  },
+  "@bp3": {
+    width: "150px",
   },
   "&:hover": {
     animation: `${grow} 400ms linear`,

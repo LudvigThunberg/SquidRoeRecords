@@ -1,53 +1,50 @@
-import React from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { navIsOpen } from "../atoms/navIsOpen";
+import { EmailForm } from "../components/basic/EmailForm";
 import { Header } from "../components/basic/Header";
 import { SocialsLinks } from "../components/basic/SocialsLinks";
 import { ContentContainer } from "../components/styledComponents/ContentContainer";
 import { Heading } from "../components/styledComponents/Heading";
 import { ContactLinkResponse } from "../models/responseModels";
 import { getSoc } from "../services/requestService";
-import Error from "next/error";
-import { isOnContactPage } from "../atoms/isOnContactPage";
-import { useRouter } from "next/router";
 
-interface HomeProps {
-  res: ContactLinkResponse;
-  errorCode: number;
+interface ContactProps {
+  links: ContactLinkResponse;
 }
 
-export default function Home({ errorCode, res }: HomeProps) {
+export default function Contact({ links }: ContactProps) {
   const isOpen = useRecoilValue(navIsOpen);
-  if (errorCode) {
-    return <Error statusCode={errorCode} />;
-  }
 
   return (
     <ContentContainer isOpen={isOpen}>
       <Header />
       <Heading
         isOpen={isOpen}
+        as="h2"
         css={{
-          "@bp2": { fontSize: "50px" },
+          paddingTop: "20px",
+          "@bp2": { fontSize: "30px", paddingTop: "40px" },
           "@bp3": {
-            fontSize: "100px",
+            fontSize: "70px",
           },
         }}
       >
-        SQUID ROE RECORDS
+        CONTACT
       </Heading>
-      <SocialsLinks data={res} />
+
+      <SocialsLinks data={links} />
+      <EmailForm />
     </ContentContainer>
   );
 }
 
 export async function getServerSideProps() {
   try {
-    const res = await getSoc(
+    const links = await getSoc(
       process.env.NEXT_PUBLIC_BASE_URL as string,
       process.env.NEXT_PUBLIC_API_KEY as string
     );
-    return { props: { errorCode: NaN, res } };
+    return { props: { errorCode: NaN, links } };
   } catch (error: any) {
     if (error.response.status) {
       return { props: { errorCode: error.response.status } };

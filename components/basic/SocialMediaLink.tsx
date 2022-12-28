@@ -1,33 +1,23 @@
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { ContactLinkObject } from "../../models/responseModels";
+import { Box } from "../styledComponents/Box";
 import { Img } from "../styledComponents/Img";
 import { StyledALink } from "../styledComponents/StyledALink";
+import { StyledContactPageLink } from "../styledComponents/StyledContactPageLink";
 
 interface SocialMediaLinkProps {
   link: ContactLinkObject;
+  onContact: boolean;
 }
 
-export const SocialMediaLink = ({ link }: SocialMediaLinkProps) => {
-  const { contactLink, iconUrl } = link.attributes;
+export const SocialMediaLink = ({ link, onContact }: SocialMediaLinkProps) => {
+  const { contactLink, iconUrl, email } = link.attributes;
+
   return (
-    // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
-      {contactLink && (
-        <StyledALink
-          css={{
-            background: "transparent",
-            width: "35px",
-            borderRadius: "50%",
-            cursor: "pointer",
-            zIndex: "1",
-            transition: "box-shadow 0.5s ease",
-            "&:hover": {},
-            "@bp2": {
-              width: "55px",
-            },
-          }}
-          href={contactLink}
-          target="_blank"
-        >
+      {onContact && email ? (
+        <StyledContactPageLink href={`mailto:${email}`}>
           <Img
             css={{
               width: "100%",
@@ -35,7 +25,29 @@ export const SocialMediaLink = ({ link }: SocialMediaLinkProps) => {
             }}
             src={iconUrl}
           />
-        </StyledALink>
+        </StyledContactPageLink>
+      ) : onContact && contactLink ? (
+        <StyledContactPageLink href={contactLink} target="_blank">
+          <Img
+            css={{
+              width: "100%",
+              borderRadius: "50%",
+            }}
+            src={iconUrl}
+          />
+        </StyledContactPageLink>
+      ) : (
+        contactLink && (
+          <StyledALink href={contactLink} target="_blank">
+            <Img
+              css={{
+                width: "100%",
+                borderRadius: "50%",
+              }}
+              src={iconUrl}
+            />
+          </StyledALink>
+        )
       )}
     </>
   );

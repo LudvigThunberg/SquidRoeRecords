@@ -1,4 +1,4 @@
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { navIsOpen } from "../atoms/navIsOpen";
 import { Albums } from "../components/basic/Albums";
 import { Header } from "../components/basic/Header";

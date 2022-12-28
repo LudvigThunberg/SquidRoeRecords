@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mailchimp/mailchimp_marketing": "^3.0.80",
     "@stitches/react": "^1.2.8",
     "@types/node": "18.11.14",
     "@types/react": "18.0.26",
