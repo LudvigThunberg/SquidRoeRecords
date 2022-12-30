@@ -31,8 +31,7 @@ export default function Playlists({
         isOpen={isOpen}
         as="h2"
         css={{
-          paddingTop: "20px",
-          "@bp2": { fontSize: "30px", paddingTop: "40px" },
+          "@bp2": { fontSize: "30px" },
           "@bp3": {
             fontSize: "70px",
           },

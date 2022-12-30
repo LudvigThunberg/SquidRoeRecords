@@ -43,6 +43,6 @@ export const getAboutContent = async (baseUrl: string, apiKey: string) => {
 };
 
 export const subscribeToMailingList = async (baseUrl: string, data: object) => {
-  const res = await post(`${baseUrl}email`, data);
+  const res = await post(`${baseUrl}mailchimp`, data);
   return res;
 };

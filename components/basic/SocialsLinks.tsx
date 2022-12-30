@@ -8,19 +8,20 @@ import { SocialMediaLink } from "./SocialMediaLink";
 
 interface SocialLinksProps {
   data: { data: ContactLinkObject[] };
+  onContact?: boolean;
 }
 
-export const SocialsLinks = ({ data }: SocialLinksProps) => {
+export const SocialsLinks = ({ data, onContact }: SocialLinksProps) => {
   const isOpen = useRecoilValue(navIsOpen);
 
   const router = useRouter();
-  const [onContact, setOnContact] = useState(false);
+  /* const [onContact, setOnContact] = useState(false);
 
   useEffect(() => {
     if (router.pathname === "/contact" && onContact === false) {
       setOnContact(true);
     }
-  }, []);
+  }, []); */
 
   const socialLinks = data.data.map((link) => {
     return <SocialMediaLink key={link.id} link={link} onContact={onContact} />;
@@ -33,9 +34,7 @@ export const SocialsLinks = ({ data }: SocialLinksProps) => {
         display: "flex",
         gap: "10px",
         background: "transparent",
-        paddingBottom: "80px",
         "@bp2": {
-          paddingBottom: "200px",
           gap: "20px",
         },
       }}

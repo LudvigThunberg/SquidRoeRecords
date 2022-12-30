@@ -1,5 +1,5 @@
-import React from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import React, { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
 import { navIsOpen } from "../atoms/navIsOpen";
 import { Header } from "../components/basic/Header";
 import { SocialsLinks } from "../components/basic/SocialsLinks";
@@ -8,8 +8,8 @@ import { Heading } from "../components/styledComponents/Heading";
 import { ContactLinkResponse } from "../models/responseModels";
 import { getSoc } from "../services/requestService";
 import Error from "next/error";
-import { isOnContactPage } from "../atoms/isOnContactPage";
-import { useRouter } from "next/router";
+import { ToastContainer } from "react-toastify";
+import router from "next/router";
 
 interface HomeProps {
   res: ContactLinkResponse;
@@ -18,17 +18,28 @@ interface HomeProps {
 
 export default function Home({ errorCode, res }: HomeProps) {
   const isOpen = useRecoilValue(navIsOpen);
+  const [onIndex, setOnIndex] = useState(false);
+
+  useEffect(() => {
+    if (router.pathname === "/" && onIndex === false) {
+      setOnIndex(true);
+    }
+  }, []);
+
   if (errorCode) {
     return <Error statusCode={errorCode} />;
   }
 
   return (
-    <ContentContainer isOpen={isOpen}>
+    <ContentContainer isOnIndex={onIndex} isOpen={isOpen}>
       <Header />
       <Heading
         isOpen={isOpen}
         css={{
-          "@bp2": { fontSize: "50px" },
+          textAlign: "center",
+          fontSize: "50px",
+          "@bp1": { fontSize: "80px" },
+          "@bp2": { fontSize: "70px" },
           "@bp3": {
             fontSize: "100px",
           },
@@ -37,6 +48,18 @@ export default function Home({ errorCode, res }: HomeProps) {
         SQUID ROE RECORDS
       </Heading>
       <SocialsLinks data={res} />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </ContentContainer>
   );
 }

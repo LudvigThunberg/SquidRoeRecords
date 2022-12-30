@@ -1,4 +1,7 @@
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import router from "next/router";
+import { useEffect, useState } from "react";
+import { ToastContainer } from "react-toastify";
+import { useRecoilValue } from "recoil";
 import { navIsOpen } from "../atoms/navIsOpen";
 import { EmailForm } from "../components/basic/EmailForm";
 import { Header } from "../components/basic/Header";
@@ -14,16 +17,26 @@ interface ContactProps {
 
 export default function Contact({ links }: ContactProps) {
   const isOpen = useRecoilValue(navIsOpen);
+  const [onIndex, setOnIndex] = useState(false);
+  const [onContact, setOnContact] = useState(false);
+
+  useEffect(() => {
+    if (router.pathname === "/contact" && onIndex === false) {
+      setOnIndex(true);
+    }
+    if (router.pathname === "/contact" && onContact === false) {
+      setOnContact(true);
+    }
+  }, []);
 
   return (
-    <ContentContainer isOpen={isOpen}>
+    <ContentContainer isOnIndex={onIndex} isOpen={isOpen}>
       <Header />
       <Heading
         isOpen={isOpen}
         as="h2"
         css={{
-          paddingTop: "20px",
-          "@bp2": { fontSize: "30px", paddingTop: "40px" },
+          "@bp2": { fontSize: "30px" },
           "@bp3": {
             fontSize: "70px",
           },
@@ -32,7 +45,7 @@ export default function Contact({ links }: ContactProps) {
         CONTACT
       </Heading>
 
-      <SocialsLinks data={links} />
+      <SocialsLinks onContact={onContact} data={links} />
       <EmailForm />
     </ContentContainer>
   );

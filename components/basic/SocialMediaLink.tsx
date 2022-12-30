@@ -8,7 +8,7 @@ import { StyledContactPageLink } from "../styledComponents/StyledContactPageLink
 
 interface SocialMediaLinkProps {
   link: ContactLinkObject;
-  onContact: boolean;
+  onContact?: boolean;
 }
 
 export const SocialMediaLink = ({ link, onContact }: SocialMediaLinkProps) => {

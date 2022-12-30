@@ -1,4 +1,5 @@
 import React from "react";
+import { ToastContainer } from "react-toastify";
 import { BackgroundBox } from "../styledComponents/BackgroundBox";
 
 type StaticBackgroundContainerProps = {

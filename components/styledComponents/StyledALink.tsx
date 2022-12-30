@@ -13,6 +13,7 @@ export const StyledALink = styled("a", {
   borderRadius: "50%",
   cursor: "pointer",
   zIndex: "1",
+  "@bp1": { width: "45px" },
   "@bp2": {
     width: "55px",
   },

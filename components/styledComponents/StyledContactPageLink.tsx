@@ -9,7 +9,7 @@ const grow = keyframes({
 export const StyledContactPageLink = styled("a", {
   background: "transparent",
   transition: "all .2s ease-in-out",
-  width: "90px",
+  width: "80px",
   borderRadius: "50%",
   cursor: "pointer",
   zIndex: "1",
@@ -17,7 +17,7 @@ export const StyledContactPageLink = styled("a", {
     width: "120px",
   },
   "@bp3": {
-    width: "150px",
+    width: "130px",
   },
   "&:hover": {
     animation: `${grow} 400ms linear`,
