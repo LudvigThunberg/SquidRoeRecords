@@ -3,3 +3,9 @@ export interface IconLinkModel {
   link: string;
   name: string;
 }
+
+export interface SendEmailModel {
+  name: string;
+  email: string;
+  gdpr: boolean;
+}

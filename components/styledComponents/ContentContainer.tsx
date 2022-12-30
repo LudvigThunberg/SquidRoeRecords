@@ -13,8 +13,10 @@ export const ContentContainer = styled("div", {
   transition: "opacity 0.3s ease-out",
   overflowY: "scroll",
   overflowX: "hidden",
+  paddingBottom: "80px",
   "@bp2": {
     height: "100vh",
+    paddingBottom: "100px",
   },
   variants: {
     isOpen: {
@@ -23,6 +25,11 @@ export const ContentContainer = styled("div", {
       },
       false: {
         opacity: "1",
+      },
+    },
+    isOnIndex: {
+      true: {
+        paddingBottom: "0px",
       },
     },
   },

@@ -2,7 +2,7 @@
 *{
     font-family: 'Roboto', sans-serif;
     margin: 0;
-    background-color: #666666;
+    background: transparent;
     box-sizing: border-box;
 }
 *::-webkit-scrollbar{
@@ -14,4 +14,8 @@
     background: #666666;
     border: 1px solid #DEDEDE;
     border-radius: 20px;
+}
+
+*::placeholder{
+    color: #DEDEDE;
 }

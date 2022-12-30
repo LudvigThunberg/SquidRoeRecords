@@ -20,7 +20,7 @@ export const Header = () => {
     <StyledHeader>
       <StyledLink
         type="logo"
-        css={{ borderRadius: "50%" }}
+        css={{ borderRadius: "50%", display: "flex", alignItems: "center" }}
         onClick={handleClick}
         href="/" /* css={{ paddingLeft: "40px" }} */
       >

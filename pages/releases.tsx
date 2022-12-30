@@ -1,4 +1,4 @@
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { navIsOpen } from "../atoms/navIsOpen";
 import { Albums } from "../components/basic/Albums";
 import { Header } from "../components/basic/Header";
@@ -38,8 +38,7 @@ export default function Releases({
         isOpen={isOpen}
         as="h2"
         css={{
-          paddingTop: "20px",
-          "@bp2": { fontSize: "30px", paddingTop: "40px" },
+          "@bp2": { fontSize: "30px" },
           "@bp3": {
             fontSize: "70px",
           },

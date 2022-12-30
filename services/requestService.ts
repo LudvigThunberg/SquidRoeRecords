@@ -7,7 +7,7 @@ import {
   ContactLinkResponse,
   IconModelResponse,
 } from "../models/responseModels";
-import { get } from "./handleRequests";
+import { get, post } from "./handleRequests";
 
 export const getSoc = async (baseUrl: string, apiKey: string) => {
   const res = await get<ContactLinkResponse>(`${baseUrl}contact-links`, apiKey);
@@ -39,5 +39,10 @@ export const getAboutContent = async (baseUrl: string, apiKey: string) => {
     apiKey
   );
 
+  return res;
+};
+
+export const subscribeToMailingList = async (baseUrl: string, data: object) => {
+  const res = await post(`${baseUrl}mailchimp`, data);
   return res;
 };

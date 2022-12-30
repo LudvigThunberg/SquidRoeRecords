@@ -9,7 +9,7 @@ export const StyledHeader = styled("header", {
   alignItems: "center",
   position: "relative",
   overflow: "unset",
-  padding: "30px 40px 30px 40px",
+  padding: "20px 40px 20px 40px",
   "@bp2": {
     padding: "40px 50px 40px 50px",
   },

@@ -13,6 +13,21 @@ export const Box = styled("div", {
         right: "1",
       },
     },
+    isOnContact: {
+      true: {
+        maxWidth: "300px",
+        flexWrap: "wrap",
+        justifyContent: "center",
+        "@bp2": {
+          maxWidth: "500px",
+          paddingBottom: "0px",
+        },
+        "@bp3": {
+          flexWrap: "nowrap",
+          maxWidth: "1000px",
+        },
+      },
+    },
     variant: {
       contentContainer: {
         width: "90%",
@@ -20,7 +35,7 @@ export const Box = styled("div", {
         flexDirection: "column",
         padding: "20px",
         borderRadius: "3px",
-        background: "$solidGray",
+        background: "$spotifyGray",
         maxWidth: "320px",
         "@bp2": {
           maxWidth: "740px",
