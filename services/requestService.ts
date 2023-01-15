@@ -17,12 +17,13 @@ export const getSoc = async (baseUrl: string, apiKey: string) => {
 
 export const getReleases = async (baseUrl: string, apiKey: string) => {
   const res = await get<AlbumModelResponse>(`${baseUrl}albums`, apiKey);
+  console.log("releases", res.data);
 
   return res;
 };
 
 export const getIcons = async (baseUrl: string, apiKey: string) => {
-  const res = await get<IconModelResponse>(`${baseUrl}icons`, apiKey);
+  const res = await get<IconModelResponse>(`${baseUrl}social-icons`, apiKey);
 
   return res;
 };

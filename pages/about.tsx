@@ -89,6 +89,8 @@ export async function getServerSideProps() {
     ]);
 
     const [links, aboutUnsorted] = await res;
+    console.log("Response: ", links.data);
+    console.log("ResponseaboutUnsorted: ", aboutUnsorted.data);
 
     const about = aboutUnsorted.data.sort(
       (a, b) => a.attributes.order - b.attributes.order

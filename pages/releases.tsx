@@ -70,6 +70,8 @@ export async function getServerSideProps() {
     ]);
 
     const [links, releasesUnsorted, icons] = await res;
+    console.log("links", links.data);
+    console.log("releasesUnsorted", releasesUnsorted.data);
 
     const releases = releasesUnsorted.data.sort(
       (a, b) =>

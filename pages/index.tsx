@@ -70,8 +70,10 @@ export async function getServerSideProps() {
       process.env.NEXT_PUBLIC_BASE_URL as string,
       process.env.NEXT_PUBLIC_API_KEY as string
     );
+
     return { props: { errorCode: NaN, res } };
   } catch (error: any) {
+    console.log("ERRORESSS: ", error);
     if (error.response.status) {
       return { props: { errorCode: error.response.status } };
     }
