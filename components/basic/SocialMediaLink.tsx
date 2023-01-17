@@ -1,7 +1,4 @@
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import { ContactLinkObject } from "../../models/responseModels";
-import { Box } from "../styledComponents/Box";
 import { Img } from "../styledComponents/Img";
 import { StyledALink } from "../styledComponents/StyledALink";
 import { StyledContactPageLink } from "../styledComponents/StyledContactPageLink";
