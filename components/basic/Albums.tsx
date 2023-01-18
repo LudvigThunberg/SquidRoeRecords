@@ -16,10 +16,7 @@ export const Albums = ({ releases, icons }: AlbumsProps) => {
     return <Album key={album.id} album={album} icons={icons} />;
   });
   return (
-    <Box
-      isOpen={isOpen}
-      css={{ width: "100%", display: "flex", justifyContent: "center" }}
-    >
+    <Box css={{ width: "100%", display: "flex", justifyContent: "center" }}>
       <Box
         css={{
           width: "100%",

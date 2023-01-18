@@ -5,13 +5,13 @@ export const StyledNav = styled("nav", {
   height: "100vh",
   position: "absolute",
   top: "0",
-  right: "-100%",
+  right: "0",
   background: "transparent",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  transition: "right 0.5s ease-in-out",
-  '@bp2': {
+  transition: "right 0.2s ease-in-out",
+  "@bp2": {
     position: "unset",
     height: "unset",
   },
@@ -19,6 +19,8 @@ export const StyledNav = styled("nav", {
     isOpen: {
       true: {
         right: "0",
+        background: "rgba(0, 0, 0, 0.8)",
+        zIndex: 3,
       },
       false: {
         right: "-100vw",

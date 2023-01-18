@@ -14,10 +14,7 @@ export const AllPlaylists = ({ playlists }: AllPlaylistsProps) => {
   });
 
   return (
-    <Box
-      isOpen={isOpen}
-      css={{ width: "100%", display: "flex", justifyContent: "center" }}
-    >
+    <Box css={{ width: "100%", display: "flex", justifyContent: "center" }}>
       <Box
         css={{
           width: "100%",
