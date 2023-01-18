@@ -14,7 +14,7 @@ export const ContentContainer = styled("div", {
   overflowX: "hidden",
   "@bp2": {
     height: "100vh",
-    paddingBottom: "100px",
+    paddingBottom: "250px",
   },
   variants: {
     isOpen: {
@@ -25,7 +25,10 @@ export const ContentContainer = styled("div", {
     },
     isOnIndex: {
       true: {
-        paddingBottom: "0px",
+        "@bp2": {
+          height: "100vh",
+          paddingBottom: "250px",
+        },
       },
     },
   },

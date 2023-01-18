@@ -14,10 +14,7 @@ export const Layout = ({ children }: LayoutProps) => {
   const [onIndex, setOnIndex] = useState(false);
 
   useEffect(() => {
-    if (
-      router.pathname === "/" ||
-      (router.pathname === "/contact" && onIndex === false)
-    ) {
+    if (router.pathname === "/" && onIndex === false) {
       setOnIndex(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
