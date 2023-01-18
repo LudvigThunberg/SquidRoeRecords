@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 describe("Testing /contact", () => {
   it("should visit squidroe homepage", () => {
     cy.visit("/contact");
