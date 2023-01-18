@@ -1,7 +1,7 @@
 import { useFormContext } from "react-hook-form";
 import { Paragraph } from "../styledComponents/Paragraph";
 import { StyledInput } from "../styledComponents/StyledInput";
-import { StyledLabel } from "../styledComponents/StyledLabel";
+
 interface FormFieldProps {
   labelText?: string;
   inputType: string;

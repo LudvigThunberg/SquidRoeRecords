@@ -28,9 +28,10 @@ export const EmailForm = () => {
     subscribeToMailingList(NEXT_BASE_URL, data)
       .then((response) => {
         toast.success("Thank you!");
-        console.log("RESPONSE!!", response);
       })
       .catch((error) => {
+        console.log("error", error);
+
         if (error.response.status === 400) {
           toast.warning("Email address is already submitted");
         }
@@ -41,7 +42,7 @@ export const EmailForm = () => {
   };
   return (
     <FormProvider {...methods}>
-      <StyledForm isOpen={isOpen} onSubmit={methods.handleSubmit(onSubmit)}>
+      <StyledForm onSubmit={methods.handleSubmit(onSubmit)}>
         <FormField
           labelText="Name"
           inputType="text"

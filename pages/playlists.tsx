@@ -1,13 +1,11 @@
-import { useRecoilValue } from "recoil";
-import { navIsOpen } from "../atoms/navIsOpen";
-import { Header } from "../components/basic/Header";
-import { ContentContainer } from "../components/styledComponents/ContentContainer";
 import { getPlaylists, getSoc } from "../services/requestService";
 import Error from "next/error";
 import { ContactLinkResponse, PlaylistModel } from "../models/responseModels";
 import { Heading } from "../components/styledComponents/Heading";
 import { SocialsLinks } from "../components/basic/SocialsLinks";
 import { AllPlaylists } from "../components/basic/AllPlaylists";
+import { MotionContainer } from "../components/styledComponents/MotionContainer";
+import { fadeInAndUp } from "../motionAnimations/motionAnimations";
 
 interface PlaylistsProps {
   errorCode: number;
@@ -20,15 +18,17 @@ export default function Playlists({
   links,
   playlists,
 }: PlaylistsProps) {
-  const isOpen = useRecoilValue(navIsOpen);
   if (errorCode) {
     return <Error statusCode={errorCode} />;
   }
   return (
-    <ContentContainer isOpen={isOpen}>
-      <Header />
+    <MotionContainer
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      variants={fadeInAndUp}
+    >
       <Heading
-        isOpen={isOpen}
         as="h2"
         css={{
           "@bp2": { fontSize: "30px" },
@@ -40,8 +40,8 @@ export default function Playlists({
         PLAYLISTS
       </Heading>
       <AllPlaylists playlists={playlists} />
-      <SocialsLinks data={links} />
-    </ContentContainer>
+      <SocialsLinks onContact={false} data={links} />
+    </MotionContainer>
   );
 }
 

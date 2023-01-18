@@ -1,15 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
-import { navIsOpen } from "../atoms/navIsOpen";
-import { Header } from "../components/basic/Header";
+import React from "react";
 import { SocialsLinks } from "../components/basic/SocialsLinks";
-import { ContentContainer } from "../components/styledComponents/ContentContainer";
 import { Heading } from "../components/styledComponents/Heading";
 import { ContactLinkResponse } from "../models/responseModels";
 import { getSoc } from "../services/requestService";
 import Error from "next/error";
-import { ToastContainer } from "react-toastify";
-import router from "next/router";
+import { MotionContainer } from "../components/styledComponents/MotionContainer";
+import { fadeInAndUp } from "../motionAnimations/motionAnimations";
 
 interface HomeProps {
   res: ContactLinkResponse;
@@ -17,24 +13,25 @@ interface HomeProps {
 }
 
 export default function Home({ errorCode, res }: HomeProps) {
-  const isOpen = useRecoilValue(navIsOpen);
-  const [onIndex, setOnIndex] = useState(false);
-
-  useEffect(() => {
-    if (router.pathname === "/" && onIndex === false) {
-      setOnIndex(true);
-    }
-  }, []);
-
   if (errorCode) {
     return <Error statusCode={errorCode} />;
   }
 
   return (
-    <ContentContainer isOnIndex={onIndex} isOpen={isOpen}>
-      <Header />
+    <MotionContainer
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      variants={fadeInAndUp}
+      css={{
+        height: "calc(100vh - 150px)",
+        justifyContent: "space-around",
+        "@bp2": {
+          paddingTop: "150px",
+        },
+      }}
+    >
       <Heading
-        isOpen={isOpen}
         css={{
           textAlign: "center",
           fontSize: "50px",
@@ -48,19 +45,7 @@ export default function Home({ errorCode, res }: HomeProps) {
         SQUID ROE RECORDS
       </Heading>
       <SocialsLinks data={res} />
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss={false}
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
-    </ContentContainer>
+    </MotionContainer>
   );
 }
 
@@ -70,6 +55,7 @@ export async function getServerSideProps() {
       process.env.NEXT_PUBLIC_BASE_URL as string,
       process.env.NEXT_PUBLIC_API_KEY as string
     );
+
     return { props: { errorCode: NaN, res } };
   } catch (error: any) {
     if (error.response.status) {

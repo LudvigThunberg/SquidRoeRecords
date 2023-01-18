@@ -27,6 +27,9 @@ export const Box = styled("div", {
           maxWidth: "1000px",
         },
       },
+      false: {
+        paddingBottom: "100px",
+      },
     },
     variant: {
       contentContainer: {
