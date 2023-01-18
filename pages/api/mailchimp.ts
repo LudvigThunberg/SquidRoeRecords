@@ -10,8 +10,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  console.log(req.body);
-
   const { email, name } = req.body;
 
   try {
@@ -26,7 +24,6 @@ export default async function handler(
         },
       }
     );
-    console.log(response);
     res.send(response);
   } catch (error: any) {
     if (error.status) {

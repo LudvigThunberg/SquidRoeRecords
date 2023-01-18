@@ -1,9 +1,5 @@
-import { useRecoilState, useRecoilValue } from "recoil";
-import { navIsOpen } from "../atoms/navIsOpen";
 import { Albums } from "../components/basic/Albums";
-import { Header } from "../components/basic/Header";
 import { SocialsLinks } from "../components/basic/SocialsLinks";
-import { ContentContainer } from "../components/styledComponents/ContentContainer";
 import { Heading } from "../components/styledComponents/Heading";
 import {
   AlbumModel,
@@ -12,6 +8,8 @@ import {
 } from "../models/responseModels";
 import { getIcons, getReleases, getSoc } from "../services/requestService";
 import Error from "next/error";
+import { MotionContainer } from "../components/styledComponents/MotionContainer";
+import { fadeInAndUp } from "../motionAnimations/motionAnimations";
 
 interface HomeProps {
   links: ContactLinkResponse;
@@ -26,16 +24,18 @@ export default function Releases({
   releases,
   icons,
 }: HomeProps) {
-  const isOpen = useRecoilValue(navIsOpen);
   if (errorCode) {
     return <Error statusCode={errorCode} />;
   }
 
   return (
-    <ContentContainer isOpen={isOpen}>
-      <Header />
+    <MotionContainer
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      variants={fadeInAndUp}
+    >
       <Heading
-        isOpen={isOpen}
         as="h2"
         css={{
           "@bp2": { fontSize: "30px" },
@@ -47,8 +47,8 @@ export default function Releases({
         RELEASES
       </Heading>
       <Albums releases={releases} icons={icons} />
-      <SocialsLinks data={links} />
-    </ContentContainer>
+      <SocialsLinks onContact={false} data={links} />
+    </MotionContainer>
   );
 }
 
@@ -70,8 +70,6 @@ export async function getServerSideProps() {
     ]);
 
     const [links, releasesUnsorted, icons] = await res;
-    console.log("links", links.data);
-    console.log("releasesUnsorted", releasesUnsorted.data);
 
     const releases = releasesUnsorted.data.sort(
       (a, b) =>

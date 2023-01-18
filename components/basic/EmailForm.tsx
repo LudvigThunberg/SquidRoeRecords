@@ -42,7 +42,7 @@ export const EmailForm = () => {
   };
   return (
     <FormProvider {...methods}>
-      <StyledForm isOpen={isOpen} onSubmit={methods.handleSubmit(onSubmit)}>
+      <StyledForm onSubmit={methods.handleSubmit(onSubmit)}>
         <FormField
           labelText="Name"
           inputType="text"

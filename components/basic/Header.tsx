@@ -20,9 +20,14 @@ export const Header = () => {
     <StyledHeader>
       <StyledLink
         type="logo"
-        css={{ borderRadius: "50%", display: "flex", alignItems: "center" }}
+        css={{
+          borderRadius: "50%",
+          display: "flex",
+          alignItems: "center",
+          zIndex: "4",
+        }}
         onClick={handleClick}
-        href="/" /* css={{ paddingLeft: "40px" }} */
+        href="/"
       >
         <Image
           src="/assets/SquidRoeLogo.png"
@@ -31,11 +36,11 @@ export const Header = () => {
           height={70}
           style={{
             borderRadius: "50%",
-            //boxShadow: "16px 16px 60px 10px rgba(0,0,0,0.5)",
           }}
         />
       </StyledLink>
       <Hamburger />
+
       <StyledNav isOpen={isOpen}>
         <StyledUl>
           <StyledLi>
