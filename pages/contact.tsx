@@ -1,39 +1,41 @@
-import router from "next/router";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { ToastContainer } from "react-toastify";
-import { useRecoilValue } from "recoil";
-import { navIsOpen } from "../atoms/navIsOpen";
 import { EmailForm } from "../components/basic/EmailForm";
-import { Header } from "../components/basic/Header";
 import { SocialsLinks } from "../components/basic/SocialsLinks";
-import { ContentContainer } from "../components/styledComponents/ContentContainer";
 import { Heading } from "../components/styledComponents/Heading";
+import { MotionContainer } from "../components/styledComponents/MotionContainer";
 import { ContactLinkResponse } from "../models/responseModels";
 import { getSoc } from "../services/requestService";
+import Error from "next/error";
+import { fadeInAndUp } from "../motionAnimations/motionAnimations";
 
 interface ContactProps {
   links: ContactLinkResponse;
+  errorCode: number;
 }
 
-export default function Contact({ links }: ContactProps) {
-  const isOpen = useRecoilValue(navIsOpen);
-  const [onIndex, setOnIndex] = useState(false);
+export default function Contact({ links, errorCode }: ContactProps) {
   const [onContact, setOnContact] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
-    if (router.pathname === "/contact" && onIndex === false) {
-      setOnIndex(true);
-    }
     if (router.pathname === "/contact" && onContact === false) {
       setOnContact(true);
     }
   }, []);
 
+  if (errorCode) {
+    return <Error statusCode={errorCode} />;
+  }
+
   return (
-    <ContentContainer isOnIndex={onIndex} isOpen={isOpen}>
-      <Header />
+    <MotionContainer
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      variants={fadeInAndUp}
+    >
       <Heading
-        isOpen={isOpen}
         as="h2"
         css={{
           "@bp2": { fontSize: "30px" },
@@ -47,7 +49,7 @@ export default function Contact({ links }: ContactProps) {
 
       <SocialsLinks onContact={onContact} data={links} />
       <EmailForm />
-    </ContentContainer>
+    </MotionContainer>
   );
 }
 

@@ -1,14 +1,13 @@
-import { useRecoilValue } from "recoil";
-import { navIsOpen } from "../atoms/navIsOpen";
-import { Header } from "../components/basic/Header";
 import { SocialsLinks } from "../components/basic/SocialsLinks";
-import { ContentContainer } from "../components/styledComponents/ContentContainer";
 import { Heading } from "../components/styledComponents/Heading";
 import { AboutModel, ContactLinkResponse } from "../models/responseModels";
 import { getAboutContent, getSoc } from "../services/requestService";
 import Error from "next/error";
 import { AboutSection } from "../components/basic/AboutSection";
 import { Box } from "../components/styledComponents/Box";
+import { MotionContainer } from "../components/styledComponents/MotionContainer";
+import { fadeInAndUp } from "../motionAnimations/motionAnimations";
+import { ToastContainer } from "react-toastify";
 
 interface AboutProps {
   links: ContactLinkResponse;
@@ -17,25 +16,26 @@ interface AboutProps {
 }
 
 export default function About({ links, errorCode, about }: AboutProps) {
-  const isOpen = useRecoilValue(navIsOpen);
   if (errorCode) {
     return <Error statusCode={errorCode} />;
   }
-  console.log("links: ", about);
 
   const abouts = about.map((aboutSection) => {
     return (
-      <Box css={{}} key={aboutSection.id}>
+      <Box key={aboutSection.id}>
         <AboutSection aboutSection={aboutSection} />
       </Box>
     );
   });
 
   return (
-    <ContentContainer isOpen={isOpen}>
-      <Header />
+    <MotionContainer
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      variants={fadeInAndUp}
+    >
       <Heading
-        isOpen={isOpen}
         as="h2"
         css={{
           "@bp2": { fontSize: "30px" },
@@ -65,12 +65,23 @@ export default function About({ links, errorCode, about }: AboutProps) {
             gridTemplateColumns: "auto",
           },
         }}
-        isOpen={isOpen}
       >
         {abouts}
       </Box>
-      <SocialsLinks data={links} />
-    </ContentContainer>
+      <SocialsLinks onContact={false} data={links} />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
+    </MotionContainer>
   );
 }
 
@@ -89,8 +100,6 @@ export async function getServerSideProps() {
     ]);
 
     const [links, aboutUnsorted] = await res;
-    console.log("Response: ", links.data);
-    console.log("ResponseaboutUnsorted: ", aboutUnsorted.data);
 
     const about = aboutUnsorted.data.sort(
       (a, b) => a.attributes.order - b.attributes.order

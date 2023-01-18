@@ -7,7 +7,7 @@ interface PlaylistProps {
 }
 
 export const Playlist = ({ playlist }: PlaylistProps) => {
-  const { title, creator, playlistLink, playlistIframe } = playlist.attributes;
+  const { title, creator, playlistIframe } = playlist.attributes;
   return (
     <Box
       variant="contentContainer"
