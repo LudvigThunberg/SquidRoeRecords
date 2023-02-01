@@ -1,3 +1,16 @@
+Conclusion.
+
+My the coding part of my project went according to plan, i did what i had planned. My biggest issue with this project was the deployment 
+of the backend/cms. I wanted to do a deployment, but my biggest issue was that i did'nt want to pay to much per month. One of the problems was that i 
+did'nt have control of the code of my backend code because i used a CMS. Even if it was easy to use Strapi, it was really hard to deploy it. 
+It took me several days, and multiple versions of the CMS just to get that going. In hindsight i probably just should have used the next API 
+and a database like firebase, and i'm doing that now. I'm currently re-writing the whole backendpart of the project in a forked version of this project here https://github.com/LudvigThunberg/SquidRoe2. The idea is to build a stable backend solution with polymorphism if i want to change database in the future, if you want to check it out you can check the branch feat/admin-page.
+
+//Ludvig Thunberg
+
+
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
